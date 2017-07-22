@@ -4,7 +4,7 @@
 #
 Name     : perl-Exception-Class
 Version  : 1.43
-Release  : 4
+Release  : 5
 URL      : https://www.cpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.43.tar.gz
 Source0  : https://www.cpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.43.tar.gz
 Summary  : 'A module that allows you to declare real exception classes in Perl'
@@ -63,8 +63,8 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/site_perl/5.24.0/Exception/Class.pm
-/usr/lib/perl5/site_perl/5.24.0/Exception/Class/Base.pm
+/usr/lib/perl5/site_perl/5.26.0/Exception/Class.pm
+/usr/lib/perl5/site_perl/5.26.0/Exception/Class/Base.pm
 
 %files doc
 %defattr(-,root,root,-)
