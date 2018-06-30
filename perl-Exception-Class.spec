@@ -4,13 +4,14 @@
 #
 Name     : perl-Exception-Class
 Version  : 1.44
-Release  : 9
-URL      : https://www.cpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.44.tar.gz
-Source0  : https://www.cpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.44.tar.gz
+Release  : 10
+URL      : https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.44.tar.gz
+Source0  : https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.44.tar.gz
 Summary  : 'A module that allows you to declare real exception classes in Perl'
 Group    : Development/Tools
-License  : Artistic-1.0-Perl GPL-1.0
-Requires: perl-Exception-Class-doc
+License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
+Requires: perl-Exception-Class-license
+Requires: perl-Exception-Class-man
 BuildRequires : perl(Class::Data::Inheritable)
 BuildRequires : perl(Devel::StackTrace)
 
@@ -18,12 +19,20 @@ BuildRequires : perl(Devel::StackTrace)
 # NAME
 Exception::Class - A module that allows you to declare real exception classes in Perl
 
-%package doc
-Summary: doc components for the perl-Exception-Class package.
-Group: Documentation
+%package license
+Summary: license components for the perl-Exception-Class package.
+Group: Default
 
-%description doc
-doc components for the perl-Exception-Class package.
+%description license
+license components for the perl-Exception-Class package.
+
+
+%package man
+Summary: man components for the perl-Exception-Class package.
+Group: Default
+
+%description man
+man components for the perl-Exception-Class package.
 
 
 %prep
@@ -51,6 +60,8 @@ make TEST_VERBOSE=1 test
 
 %install
 rm -rf %{buildroot}
+mkdir -p %{buildroot}/usr/share/doc/perl-Exception-Class
+cp LICENSE %{buildroot}/usr/share/doc/perl-Exception-Class/LICENSE
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot}
 else
@@ -66,6 +77,11 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 /usr/lib/perl5/site_perl/5.26.1/Exception/Class.pm
 /usr/lib/perl5/site_perl/5.26.1/Exception/Class/Base.pm
 
-%files doc
+%files license
 %defattr(-,root,root,-)
-%doc /usr/share/man/man3/*
+/usr/share/doc/perl-Exception-Class/LICENSE
+
+%files man
+%defattr(-,root,root,-)
+/usr/share/man/man3/Exception::Class.3
+/usr/share/man/man3/Exception::Class::Base.3
