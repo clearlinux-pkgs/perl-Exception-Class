@@ -4,13 +4,15 @@
 #
 Name     : perl-Exception-Class
 Version  : 1.44
-Release  : 19
+Release  : 20
 URL      : https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.44.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.44.tar.gz
 Summary  : 'A module that allows you to declare real exception classes in Perl'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Exception-Class-license = %{version}-%{release}
+Requires: perl(Class::Data::Inheritable)
+Requires: perl(Devel::StackTrace)
 BuildRequires : buildreq-cpan
 BuildRequires : perl(Class::Data::Inheritable)
 BuildRequires : perl(Devel::StackTrace)
@@ -23,6 +25,7 @@ Exception::Class - A module that allows you to declare real exception classes in
 Summary: dev components for the perl-Exception-Class package.
 Group: Development
 Provides: perl-Exception-Class-devel = %{version}-%{release}
+Requires: perl-Exception-Class = %{version}-%{release}
 
 %description dev
 dev components for the perl-Exception-Class package.
@@ -43,7 +46,7 @@ license components for the perl-Exception-Class package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
+export LANG=C.UTF-8
 if test -f Makefile.PL; then
 %{__perl} Makefile.PL
 make  %{?_smp_mflags}
@@ -53,7 +56,7 @@ else
 fi
 
 %check
-export LANG=C
+export LANG=C.UTF-8
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
