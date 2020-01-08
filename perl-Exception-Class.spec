@@ -4,13 +4,14 @@
 #
 Name     : perl-Exception-Class
 Version  : 1.44
-Release  : 20
+Release  : 21
 URL      : https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.44.tar.gz
 Source0  : https://cpan.metacpan.org/authors/id/D/DR/DROLSKY/Exception-Class-1.44.tar.gz
 Summary  : 'A module that allows you to declare real exception classes in Perl'
 Group    : Development/Tools
 License  : Artistic-1.0 Artistic-1.0-Perl GPL-1.0
 Requires: perl-Exception-Class-license = %{version}-%{release}
+Requires: perl-Exception-Class-perl = %{version}-%{release}
 Requires: perl(Class::Data::Inheritable)
 Requires: perl(Devel::StackTrace)
 BuildRequires : buildreq-cpan
@@ -39,8 +40,18 @@ Group: Default
 license components for the perl-Exception-Class package.
 
 
+%package perl
+Summary: perl components for the perl-Exception-Class package.
+Group: Default
+Requires: perl-Exception-Class = %{version}-%{release}
+
+%description perl
+perl components for the perl-Exception-Class package.
+
+
 %prep
 %setup -q -n Exception-Class-1.44
+cd %{_builddir}/Exception-Class-1.44
 
 %build
 export http_proxy=http://127.0.0.1:9/
@@ -65,7 +76,7 @@ make TEST_VERBOSE=1 test
 %install
 rm -rf %{buildroot}
 mkdir -p %{buildroot}/usr/share/package-licenses/perl-Exception-Class
-cp LICENSE %{buildroot}/usr/share/package-licenses/perl-Exception-Class/LICENSE
+cp %{_builddir}/Exception-Class-1.44/LICENSE %{buildroot}/usr/share/package-licenses/perl-Exception-Class/d25225967fd0485298ed3646cc4ac4d9bf745b90
 if test -f Makefile.PL; then
 make pure_install PERL_INSTALL_ROOT=%{buildroot} INSTALLDIRS=vendor
 else
@@ -78,8 +89,6 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files
 %defattr(-,root,root,-)
-/usr/lib/perl5/vendor_perl/5.28.2/Exception/Class.pm
-/usr/lib/perl5/vendor_perl/5.28.2/Exception/Class/Base.pm
 
 %files dev
 %defattr(-,root,root,-)
@@ -88,4 +97,9 @@ find %{buildroot} -type f -name '*.bs' -empty -exec rm -f {} ';'
 
 %files license
 %defattr(0644,root,root,0755)
-/usr/share/package-licenses/perl-Exception-Class/LICENSE
+/usr/share/package-licenses/perl-Exception-Class/d25225967fd0485298ed3646cc4ac4d9bf745b90
+
+%files perl
+%defattr(-,root,root,-)
+/usr/lib/perl5/vendor_perl/5.30.1/Exception/Class.pm
+/usr/lib/perl5/vendor_perl/5.30.1/Exception/Class/Base.pm
